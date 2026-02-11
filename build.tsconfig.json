@@ -1,13 +1,14 @@
 {
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "noEmit": false,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "allowImportingTsExtensions": false,
-    "moduleResolution": "node",
-    "module": "ESNext"
-  }
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"noEmit": false,
+		"declaration": true,
+		"emitDeclarationOnly": true,
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"allowImportingTsExtensions": false,
+		"moduleResolution": "node",
+		"module": "ESNext"
+	},
+    "include": ["src/**/*"],
 }

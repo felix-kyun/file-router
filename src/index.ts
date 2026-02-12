@@ -2,6 +2,7 @@ import { Method } from "@/decorators/Method";
 
 export { FileRouter } from "@/FileRouter";
 export { Controller } from "@/decorators/Controller";
+export { Middleware } from "@/decorators/Middleware";
 
 export const Get = Method("get");
 export const Post = Method("post");

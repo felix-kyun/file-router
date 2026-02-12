@@ -29,6 +29,8 @@ export async function FileRouter(
 	const path = resolve(directory);
 	ensureDirectoryExists(path);
 
+	log(() => `Scanning directory: ${path}`);
+
 	const files = glob(`${path}/**/*.{ts,js}`);
 	for await (const file of files) {
 		log(() => `Loading ${relative(path, file)}`);

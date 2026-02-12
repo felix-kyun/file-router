@@ -8,9 +8,23 @@ import { CONTROLLER, ROUTES } from "@/constants";
 import type { ControllerMeta, RouteMeta } from "@/types/Meta";
 import type { Constructor } from "@/types/Constructor";
 import { normalizeRoute } from "@/helpers/normalizeRoute";
+import { fileURLToPath } from "node:url";
 
-export async function FileRouter(directory: string): Promise<Router> {
+/*
+ * @param directory - relative to runtime directory
+ * @param callerUrl - optional, used to resolve relative paths based on the caller's location (import.meta.url)
+ */
+
+export async function FileRouter(
+	directory: string,
+	callerUrl?: string,
+): Promise<Router> {
 	const router = Router();
+
+	if (callerUrl) {
+		const callerPath = resolve(dirname(fileURLToPath(callerUrl)));
+		directory = join(callerPath, directory);
+	}
 
 	const path = resolve(directory);
 	ensureDirectoryExists(path);

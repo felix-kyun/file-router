@@ -23,9 +23,10 @@
 	"module": "src/index.ts",
 	"type": "module",
 	"scripts": {
-		"build": "bun run build:esm && bun run build:cjs && bun run build:types",
-		"build:esm": "bun build src/index.ts --outdir dist/esm --format esm --target node --minify --sourcemap=external",
-		"build:cjs": "bun build src/index.ts --outdir dist/cjs --format cjs --target node --minify --sourcemap=external --outfile index.js",
+		"prebuild": "rm -rf dist",
+		"build": "bun build:esm && bun build:cjs && bun build:types",
+		"build:esm": "bun build src/index.ts --outdir dist/esm --format esm --target node --sourcemap=external",
+		"build:cjs": "bun build src/index.ts --outdir dist/cjs --format cjs --target node --outfile index.js --sourcemap=external",
 		"build:types": "tsc --project build.tsconfig.json --outDir dist/"
 	},
 	"devDependencies": {

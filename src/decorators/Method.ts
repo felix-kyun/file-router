@@ -12,7 +12,13 @@ export function Method(method: HttpMethod) {
 		): void => {
 			const routes: RouteMeta[] =
 				Reflect.getMetadata(ROUTES, target.constructor) || [];
-			routes.push({ path, method, name: propertyKey, middleware: [] });
+			routes.push({
+				path,
+				method,
+				name: propertyKey,
+				middleware: [],
+				disabled: () => false,
+			});
 			Reflect.defineMetadata(ROUTES, routes, target.constructor);
 		};
 	};

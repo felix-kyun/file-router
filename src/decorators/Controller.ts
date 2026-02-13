@@ -7,7 +7,7 @@ export function Controller(path: string = "/") {
 	return (target: Constructor): void => {
 		Reflect.defineMetadata(
 			CONTROLLER,
-			{ path, middleware: [] } satisfies ControllerMeta,
+			{ path, middleware: [], disabled: () => false } satisfies ControllerMeta,
 			target,
 		);
 	};

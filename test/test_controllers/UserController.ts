@@ -1,3 +1,4 @@
+import { Disabled } from "@/decorators/Disabled";
 import { Middleware } from "@/decorators/Middleware";
 import { Controller, Get, Post } from "@/index";
 import type { Middleware as IMiddleware } from "@/types/Middleware";
@@ -13,6 +14,7 @@ export class UserController {
 	@Get()
 	async getAllUsers(req: Request, res: Response) {}
 
+	@Disabled(() => true)
 	@Post()
 	createUser(req: Request, res: Response) {}
 

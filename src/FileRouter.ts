@@ -45,12 +45,20 @@ export async function FileRouter(
 				| ControllerMeta
 				| undefined;
 			if (controllerMeta === undefined) return;
+			if (controllerMeta.disabled()) {
+				log(() => `Skipping disabled controller: ${e.name}`);
+				return;
+			}
 
 			const instance = new (e as Constructor)();
 			const routes = (Reflect.getMetadata(ROUTES, e) ?? []) as RouteMeta[];
 
 			// register
-			routes.forEach(({ path, method, name, middleware }) => {
+			routes.forEach(({ path, method, name, middleware, disabled }) => {
+				if (disabled()) {
+					log(() => `Skipping: ${e.name}.${name.toString()}`);
+					return;
+				}
 				const fullPath = normalizeRoute(
 					join(baseRoute, controllerMeta.path, path),
 				);

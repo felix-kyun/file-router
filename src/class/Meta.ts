@@ -2,6 +2,8 @@ import "reflect-metadata";
 import type { Condition } from "@/types/Condition";
 import type { Middleware } from "@/types/Middleware";
 import type { Route } from "@/class/Route";
+import { MissingMeta } from "@/errors/MissingMeta";
+import { MissingMethod } from "@/errors/MissingMethod";
 
 export class Meta {
 	private static readonly symbol = Symbol("Meta");
@@ -32,9 +34,7 @@ export class Meta {
 	public static get(target: Function): Meta {
 		let meta: Meta = Reflect.getMetadata(Meta.symbol, target);
 		if (!meta) {
-			throw new Error(
-				`Class Metadata not found for ${target.name}. Did you forget to decorate the class with @Controller?`,
-			);
+			throw new MissingMeta(target);
 		}
 
 		return meta;
@@ -54,10 +54,7 @@ export class Meta {
 	// Routes
 	public getRoute(name: string | symbol): Route {
 		const route = this.routes.find((route) => route.name === name);
-		if (!route)
-			throw new Error(
-				`Method ${name.toString()} is not decorated with a HTTP method decorator`,
-			);
+		if (!route) throw new MissingMethod(name);
 
 		return route;
 	}

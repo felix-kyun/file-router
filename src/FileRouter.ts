@@ -7,7 +7,7 @@ import { ensureDirectoryExists } from "@/helpers/ensureDirectoryExists";
 import type { Constructor } from "@/types/Constructor";
 import { normalizeRoute } from "@/helpers/normalizeRoute";
 import { fileURLToPath } from "node:url";
-import { Meta } from "./class/Meta";
+import { Meta } from "@/class/Meta";
 
 /*
  * @param directory - relative to runtime directory

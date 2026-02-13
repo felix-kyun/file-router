@@ -1,4 +1,4 @@
-import { DirectoryNotFound } from "@/error/DirectoryNotFound";
+import { DirectoryNotFound } from "@/errors/DirectoryNotFound";
 import { access } from "node:fs/promises";
 
 export async function ensureDirectoryExists(path: string): Promise<void> {

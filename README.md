@@ -4,7 +4,7 @@ A small and simple file and decorator based router for Express apps. It scans an
 ## Usage
 ```typescript
 import express from 'express';
-import FileRouter from 'express-file-router';
+import FileRouter from '@felix-kyun/file-router';
 
 const app = express();
 app.use("/api", await FileRouter("controllers", import.meta.url));
@@ -17,7 +17,7 @@ app.listen(3000, () => {
 ## Controllers
 ```typescript
 // controllers/userController.ts
-import { Controller, Get, Post } from 'express-file-router';
+import { Controller, Get, Post } from '@felix-kyun/file-router';
 
 @Controller("/users")
 export class UserController {
@@ -33,8 +33,15 @@ export class UserController {
     @Get("/:id")
     getUserById(req: Request, res: Response) {
     }
+
+    @Disabled(() => process.env.DISABLE_DELETE)
+    @Delete("/:id")
+    deleteUser(req: Request, res: Response) {
+    }
 }
 ```
 
 ## Important
-- use `experimentalDecorators: true` in tsconfig as the new tc39 decorators don't allow reflection.
+- use `experimentalDecorators: true` in tsconfig as the new tc39 decorators doesn't allow reflection.
+- debug logs can be enabled by setting `DEBUG` env variable to `file-router`
+- verbose logs can be enabled by setting `DEBUG` env variable to `file-router:*`

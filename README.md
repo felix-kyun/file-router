@@ -17,7 +17,7 @@ app.listen(3000, () => {
 ## Controllers
 ```typescript
 // controllers/userController.ts
-import { Controller, Get, Post } from '@felix-kyun/file-router';
+import { Controller, Disabled, Get, Post } from '@felix-kyun/file-router';
 
 @Controller("/users")
 export class UserController {
